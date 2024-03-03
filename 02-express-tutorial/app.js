@@ -1,32 +1,19 @@
 const express = require('express')
+const path = require('path')
+
 const app = express()
 
-//app.get (read data)
-//app.post (insert data)
-//app.put
-//app.delete (remove data)
-//app.all (covers all instances)
-//app.use
-//app.listen
-//app.status (explicitly change status code)
+// setup static and middleware
+app.use(express.static('./public'))
 
-app.get('/', (req, res) => {
-    console.log('user hit resourse')
-    res.status(200).send('Home Page')
-})
-
-app.get('/about', (req, res) => {
-    console.log('user hit the about page')
-    res.status(200).send('This is the about page')
-})
+// app.get('/', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, './navbar-app/index.html'))
+// })
 
 app.all('*', (req, res) => {
-    console.log('user hit a 404 page')
-    res.status(404).send('This is a 404 page')
+  res.status(404).send('resource not found')
 })
 
 app.listen(5000, () => {
-    console.log('server is listening on post: 5000')
+  console.log('server is listening on port 5000....')
 })
-
-
